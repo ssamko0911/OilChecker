@@ -3,12 +3,12 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: pure-php
+        container_name: oil-checker-php
         restart: unless-stopped
         volumes:
             - ./:/srv/app
         networks:
-            - pure
+            - oil
     
     caddy:
         image: caddy:2.7-alpine
@@ -21,8 +21,8 @@ services:
         volumes:
             - ./caddy:/etc/caddy
         networks:
-            - pure
+            - oil
 
 networks:
-    pure:
+    oil:
         driver: bridge
