@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+$oilGrade = isset($_SESSION['oilGrade']) ? htmlspecialchars($_SESSION['oilGrade']) : '';
+$engineType = isset($_SESSION['engineType']) ? htmlspecialchars($_SESSION['engineType']) : '';
+$result = isset($_SESSION['result']) ? htmlspecialchars($_SESSION['result']) : '';
+
 $mainTitle = 'Oil checker';
 $resultTitle = 'Result';
 
@@ -26,11 +32,14 @@ $engineTypeDescription = 'Enter make, model and engine, for example, Acura CSX 1
     <div class="row-g-1">
         <div class="col-4 bg-success p-2 text-white bg-opacity-75 mb-2 mt-2 rounded">
             <h2 class="section-title mb-40 text-center"><?= $mainTitle; ?></h2>
-            <form id="mainForm" method="POST" action="<?= $_SERVER['PHP_SELF']; ?>">
+            <form id="mainForm" method="POST" action="form.php">
                 <div class="mb-3">
                     <label for="oilGrade" class="form-label"><?= $oilGradeTitle; ?></label>
                     <input type="text" class="form-control" id="oilGrade" name="oilGrade">
                     <div id="oilGradeDescription" class="form-text"><?= $oilGradeDescription; ?></div>
+                    <?php if(isset($errors['oilGrade'])):?>
+                        <p style="color: red"><?= $errors['oilGrade'] ?></p>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="engineType" class="form-label"><?= $engineTypeTitle; ?></label>
@@ -44,7 +53,7 @@ $engineTypeDescription = 'Enter make, model and engine, for example, Acura CSX 1
             <h2 class="section-title mb-40 text-center"><?= $resultTitle; ?></h2>
             <div class="form-floating">
                 <label for="result"></label>
-                <textarea class="form-control" id="result" name="result" style="height: 100px" readonly></textarea>
+                <textarea class="form-control" id="result" name="result" style="height: 100px" readonly><?php echo $result; ?></textarea>
             </div>
         </div>
     </div>
