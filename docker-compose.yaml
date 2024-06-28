@@ -4,6 +4,8 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: oil-checker-php
+        env_file:
+            - .env
         restart: unless-stopped
         volumes:
             - ./:/srv/app
